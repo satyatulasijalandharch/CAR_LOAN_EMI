@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CAR_EMI</string>
+    <string name="calculate_emi">CALCULATE EMI</string>
+    <string name="emi_amount">EMI Amount</string>
+    <string name="lone_term_months">Lone Term (Months)</string>
+    <string name="interest_rate">Interest Rate</string>
+    <string name="down_payment">Down Payment</string>
+    <string name="principal_amount">Principal Amount</string>
+    <string name="emi_calculator">EMI CALCULATOR</string>
+</resources>
