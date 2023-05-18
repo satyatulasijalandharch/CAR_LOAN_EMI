@@ -1,5 +1,5 @@
 # CAR_LOAN_EMI
-MAD LAB Part-B MINI Project 6th SEM
+MAD LAB Part-B Program-8 MINI Project 6th SEM
 
 Create an AIDL service that calculates Car Loan EMI.
 The formula to calculate EMI isE = P * (r(1+r)n)/((1+r)n-1)
