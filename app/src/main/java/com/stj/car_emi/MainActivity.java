@@ -28,28 +28,43 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        PAE=(EditText) findViewById(R.id.PAE);
-        DPE=(EditText) findViewById(R.id.DPE);
-        IRE=(EditText) findViewById(R.id.IRE);
-        LTE=(EditText) findViewById(R.id.LTE);
-        EMI=(Button) findViewById(R.id.EMI);
+        PAE= findViewById(R.id.PAE);
+        DPE= findViewById(R.id.DPE);
+        IRE= findViewById(R.id.IRE);
+        LTE= findViewById(R.id.LTE);
+        EMI= findViewById(R.id.EMI);
         EMI.setOnClickListener(this);
-        EMIA=(TextView) findViewById(R.id.EMIA);
+        EMIA= findViewById(R.id.EMIA);
     }
 
     @Override
     public void onClick(View v) {
         try {
-            DecimalFormat formatter = new DecimalFormat("#0.00");
             double PrincipalAmount = Double.parseDouble(PAE.getText().toString());
             double DownPayment = Double.parseDouble(DPE.getText().toString());
-            PrincipalAmount = PrincipalAmount-DownPayment;
             double InterestRate = Double.parseDouble(IRE.getText().toString());
-            InterestRate = InterestRate/(12*100);
             double LoanTerm = Double.parseDouble(LTE.getText().toString());
+
+            if (DownPayment > PrincipalAmount) {
+                Toast.makeText(MainActivity.this, "Maximum down payment: "+ PrincipalAmount, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            double minimumDownPayment = PrincipalAmount * 0.2;
+            if (DownPayment < minimumDownPayment) {
+                Toast.makeText(MainActivity.this, "Minimum down payment: "+ minimumDownPayment, Toast.LENGTH_SHORT).show();
+                DPE.requestFocus();
+                return;
+            }
+
+            DecimalFormat formatter = new DecimalFormat("#0.00");
+            PrincipalAmount = PrincipalAmount-DownPayment;
+            InterestRate = InterestRate/(12*100);
+
             // FORMULA FOR EMI CALCULATION -> [E = P * (r(1+r)n)/((1+r)n-1)]
-            double EMI = PrincipalAmount*(InterestRate*Math.pow((1+InterestRate),LoanTerm))/
-                    (Math.pow((1+InterestRate),LoanTerm)-1);
+
+            double EMI = PrincipalAmount * (InterestRate * Math.pow((1 + InterestRate),LoanTerm))/
+                    (Math.pow((1 + InterestRate),LoanTerm)-1);
             EMIA.setText(formatter.format(EMI));
         }
 
