@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements
 
             if (DownPayment > PrincipalAmount) {
                 Toast.makeText(MainActivity.this, "Maximum down payment: "+ PrincipalAmount, Toast.LENGTH_SHORT).show();
+                DPE.requestFocus();
                 return;
             }
 
